@@ -2,7 +2,7 @@ import math
 
 def calculate_angle(p1, p2, p3):
     """
-    3つの座標から角度を計算（単位: 度）。
+    3つの座標から角度を計算（単位:度）
     - p1, p2, p3: (x, y)形式のタプル。p2が頂点となる。
     """
     dx1, dy1 = p1[0] - p2[0], p1[1] - p2[1]
@@ -30,7 +30,7 @@ def calculate_joint_angles(landmarks):
     """
     足首・膝・股関節の角度を計算。
     - landmarks: Mediapipeのランドマークリスト。
-    - 返り値: 関節角度の辞書。
+    - 返り値: 関節角度の辞書
     """
     hip = (landmarks[23].x, landmarks[23].y)  # 股関節
     knee = (landmarks[25].x, landmarks[25].y)  # 膝
