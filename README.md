@@ -13,24 +13,17 @@ Features include pose detection, motion tracking, and stroke cycle analysis.
 - `src/utils/features.py`: 特徴量計算モジュール
 - `src/utils/drawing.py`: 描画モジュール
 
-## 実行方法
-1. 必要なパッケージをインストール:
-   ```bash
-   pip install -r requirements.txt
-2.	動画を data/input/ に保存。
-3.	実行: python src/main.py
-
-rowing-analysis/
+rowing-analysis-web/
+├── app.py
 ├── src/
-│   ├── main.py               # メイン実行ファイル（エントリーポイント）
 │   ├── utils/
-│   │   ├── landmarks.py      # ランドマーク検出関連の処理
-│   │   ├── features.py       # 特徴量計算関連の処理
-│   │   ├── drawing.py        # 描画・動画作成関連の処理
-│   │   └── gui.py            # 手動調整用GUI関連の処理
-├── data/
-│   ├── input/                # 入力動画の保存先
-│   └── output/               # 解析済み動画の保存先
-├── requirements.txt          # 必要なPythonパッケージのリスト
-├── README.md                 # プロジェクトの概要・使い方説明
-└── .gitignore                # Gitで無視するファイルリスト
+│   │   ├── landmarks.py
+│   │   ├── drawing.py
+│   │   ├── features.py
+│   └── __init__.py
+├── static/
+│   ├── output/
+│   │   └── (解析後の動画ファイルがここに出力される)
+│   └── ...
+└── templates/
+    └── index.html
