@@ -1,2 +1,3 @@
-# rowing_motion_analysis
-A rowing motion analysis application using Python and MediaPipe
+# Rowing Motion Analysis
+This project analyzes rowing motion using Python and MediaPipe. 
+Features include pose detection, motion tracking, and stroke cycle analysis.
