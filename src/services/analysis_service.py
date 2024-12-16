@@ -1,3 +1,4 @@
+from typing import Dict, Optional
 import os
 import csv
 import logging
@@ -11,7 +12,29 @@ from src.utils.features import calculate_joint_angles, calculate_stroke_cycle
 logger = logging.getLogger(__name__)
 mp_pose = mp.solutions.pose
 
-def analyze_video(input_filepath, player, output_folder, results_csv):
+
+def analyze_video(
+    input_filepath: str,
+    player: str,
+    output_folder: str,
+    results_csv: str
+) -> Dict[str, object]:
+    """
+    Analyze a rowing video for stroke cycle time, pelvis angle, knee angle, and ankle angle.
+    
+    Args:
+        input_filepath: Path to the input video file.
+        player: Name of the player associated with the video.
+        output_folder: Directory to store the annotated output video.
+        results_csv: Path to the CSV file for storing cumulative results.
+
+    Returns:
+        A dictionary containing analysis results including timestamps, angles, and output filename.
+
+    Raises:
+        FileNotFoundError: If the input video file does not exist.
+        ValueError: If the video cannot be processed (e.g., FPS <= 0, no landmarks detected).
+    """
     if not os.path.exists(input_filepath):
         raise FileNotFoundError("Input video file not found.")
 
@@ -53,19 +76,20 @@ def analyze_video(input_filepath, player, output_folder, results_csv):
             pelvis_angle_avg.append(pelvis_angle)
 
             joint_angles = calculate_joint_angles(landmarks)
-            if joint_angles["knee"] is not None:
-                knee_angle_avg.append(joint_angles["knee"])
-            if joint_angles["ankle"] is not None:
-                ankle_angle_avg.append(joint_angles["ankle"])
+            knee = joint_angles.get("knee")
+            ankle = joint_angles.get("ankle")
+
+            if knee is not None:
+                knee_angle_avg.append(knee)
+            if ankle is not None:
+                ankle_angle_avg.append(ankle)
 
             frame = draw_pelvis_bounds(frame, pelvis_bounds)
             frame = draw_pelvis_orientation(frame, pelvis_angle)
-            if joint_angles["knee"] is not None:
-                cv2.putText(frame, f"Knee: {joint_angles['knee']:.2f} deg", (50, 100),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
-            if joint_angles["ankle"] is not None:
-                cv2.putText(frame, f"Ankle: {joint_angles['ankle']:.2f} deg", (50, 140),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
+            if knee is not None:
+                cv2.putText(frame, f"Knee: {knee:.2f} deg", (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+            if ankle is not None:
+                cv2.putText(frame, f"Ankle: {ankle:.2f} deg", (50, 140), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
 
             connections = [(12, 24), (24, 26), (26, 28)]
             frame = draw_landmarks(frame, landmarks, connections)
@@ -76,7 +100,7 @@ def analyze_video(input_filepath, player, output_folder, results_csv):
     out.release()
     pose.close()
 
-    if len(wrist_y_coords) == 0:
+    if not wrist_y_coords:
         raise ValueError("No valid landmarks detected. Possibly not a rowing video or detection failed.")
 
     stroke_cycle_time = calculate_stroke_cycle([(0, y) for y in wrist_y_coords], fps) if wrist_y_coords else 0
@@ -99,7 +123,11 @@ def analyze_video(input_filepath, player, output_folder, results_csv):
     logger.info(f"Analysis complete for {input_filepath}: {analysis_results}")
     return analysis_results
 
-def write_results_to_csv(results_dict, results_csv):
+
+def write_results_to_csv(results_dict: Dict[str, object], results_csv: str) -> None:
+    """
+    Append the analysis results to the CSV file. If the file doesn't exist, create it with headers.
+    """
     file_exists = os.path.exists(results_csv)
     with open(results_csv, 'a', newline='') as f:
         writer = csv.writer(f)
@@ -115,7 +143,11 @@ def write_results_to_csv(results_dict, results_csv):
             results_dict["ankle_angle"]
         ])
 
-def find_record_by_filename(filename, results_csv):
+
+def find_record_by_filename(filename: str, results_csv: str) -> Optional[list]:
+    """
+    Find a record in the CSV by output filename.
+    """
     if not os.path.exists(results_csv):
         return None
     with open(results_csv, 'r', newline='') as f:
