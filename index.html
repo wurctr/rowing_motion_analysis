@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rowing Motion Analysis</title>
+  <!-- Bootstrap CSS（CDN利用） -->
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet" 
+    integrity="sha384-9ndCyUa1j47c4KY3qzYiu7LDlUi2sCALbZ1B/TYhhcF0ScNFK0jQJk4tdfqa7lNf" 
+    crossorigin="anonymous">
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .header {
+      margin-top: 60px;
+    }
+    .card {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header text-center">
+      <h1 class="display-4">Rowing Motion Analysis</h1>
+      <p class="text-muted">アップロードされた動画を解析し、ローイング動作を分析します。</p>
+    </header>
 
+    <!-- アップロードフォームカード -->
+    <div class="card mx-auto" style="max-width: 500px;">
+      <div class="card-body">
+        <h2 class="h4 mb-4">動画アップロード</h2>
+        <!-- 
+          actionのURLは実際に解析処理を行うサーバー（Flaskアプリ）を用意している場合は
+          そちらのエンドポイントURLを記載します。
+          例： action="https://example.com/upload"
+          methodはPOST、enctypeはmultipart/form-dataが必要。
+        -->
+        <form action="#" method="post" enctype="multipart/form-data">
+          <!-- 選手名 -->
+          <div class="mb-3">
+            <label for="player" class="form-label">選手名</label>
+            <select class="form-select" name="player" id="player" required>
+              <option value="" disabled selected>選択してください</option>
+              <option value="Player A">Player A</option>
+              <option value="Player B">Player B</option>
+              <option value="Player C">Player C</option>
+            </select>
+          </div>
+
+          <!-- 動画ファイル選択 -->
+          <div class="mb-3">
+            <label for="file" class="form-label">動画ファイルを選択</label>
+            <input class="form-control" type="file" name="file" id="file" accept="video/*" required>
+          </div>
+
+          <!-- 送信ボタン -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">解析開始</button>
+          </div>
+          <small class="text-muted d-block mt-2">対応形式: mp4, avi, mov</small>
+        </form>
+      </div>
+    </div>
+
+    <footer class="text-center mt-5 text-muted">
+      <p class="mb-0">&copy; 2024 Your Organization Name</p>
+    </footer>
+  </div>
+
+  <!-- Bootstrap JS（CDN利用） -->
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+P5CJ7lR5TvZNTv617RZbG1t8M7gD" 
+    crossorigin="anonymous">
+  </script>
+</body>
+</html>
