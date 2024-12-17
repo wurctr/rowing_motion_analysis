@@ -12,36 +12,81 @@
     crossorigin="anonymous">
   <style>
     body {
-      background: #f8f9fa;
+      background-color: #333333; /* ダークグレー背景 */
+      font-family: "Helvetica", "Arial", sans-serif; /* ゴシック体 */
+      color: #f5f5f5; /* 白に近い文字色でコントラストを確保 */
+      margin: 0;
+      padding: 0;
     }
     .header {
       margin-top: 60px;
     }
+    .header-title {
+      color: #f5f5f5;
+    }
+    .header-subtitle {
+      color: #cccccc;
+    }
     .card {
       margin-top: 40px;
+      background-color: #9b1b30; /* 臙脂 */
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .card .form-label {
+      color: #f5f5f5;
+    }
+    .form-select, .form-control {
+      border-radius: 5px;
+      border: none;
+    }
+    .btn-primary {
+      background-color: #f5f5f5;
+      color: #9b1b30;
+      border: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #ffffff;
+      color: #9b1b30;
+    }
+    .card-title {
+      color: #f5f5f5;
+    }
+    .footer-text {
+      color: #cccccc;
+    }
+    .container {
+      padding: 20px;
+    }
+    @media (max-width: 576px) {
+      .card {
+        margin-top: 20px;
+      }
+      .btn {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header text-center">
-      <h1 class="display-4">Rowing Motion Analysis</h1>
-      <p class="text-muted">アップロードされた動画を解析し、ローイング動作を分析します。</p>
+  <div class="container text-center">
+    <header class="header">
+      <h1 class="display-4 header-title">Rowing Motion Analysis</h1>
+      <p class="header-subtitle">アップロードした動画を自動解析し、ローイング動作を分析します。</p>
     </header>
 
     <!-- アップロードフォームカード -->
-    <div class="card mx-auto" style="max-width: 500px;">
+    <div class="card mx-auto" style="max-width: 500px; padding: 20px;">
       <div class="card-body">
-        <h2 class="h4 mb-4">動画アップロード</h2>
-        <!-- 
-          actionのURLは実際に解析処理を行うサーバー（Flaskアプリ）を用意している場合は
-          そちらのエンドポイントURLを記載します。
-          例： action="https://example.com/upload"
-          methodはPOST、enctypeはmultipart/form-dataが必要。
-        -->
+        <h2 class="h4 card-title mb-4">動画アップロード</h2>
         <form action="#" method="post" enctype="multipart/form-data">
           <!-- 選手名 -->
-          <div class="mb-3">
+          <div class="mb-3 text-start">
             <label for="player" class="form-label">選手名</label>
             <select class="form-select" name="player" id="player" required>
               <option value="" disabled selected>選択してください</option>
@@ -52,22 +97,22 @@
           </div>
 
           <!-- 動画ファイル選択 -->
-          <div class="mb-3">
+          <div class="mb-4 text-start">
             <label for="file" class="form-label">動画ファイルを選択</label>
             <input class="form-control" type="file" name="file" id="file" accept="video/*" required>
           </div>
 
           <!-- 送信ボタン -->
           <div class="d-grid">
-            <button type="submit" class="btn btn-primary">解析開始</button>
+            <button type="submit" class="btn btn-primary btn-lg">解析開始</button>
           </div>
-          <small class="text-muted d-block mt-2">対応形式: mp4, avi, mov</small>
+          <small class="text-light d-block mt-2">対応形式: mp4, avi, mov</small>
         </form>
       </div>
     </div>
 
-    <footer class="text-center mt-5 text-muted">
-      <p class="mb-0">&copy; 2024 WURC</p>
+    <footer class="text-center mt-5">
+      <p class="footer-text mb-0">© 2024 Your Organization Name</p>
     </footer>
   </div>
 
