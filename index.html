@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rowing Motion Analysis</title>
-  <!-- Bootstrap CSS（CDN利用） -->
+  <!-- Bootstrap CSS（CDN） -->
   <link 
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet" 
@@ -14,9 +14,10 @@
     body {
       background-color: #333333; /* ダークグレー背景 */
       font-family: "Helvetica", "Arial", sans-serif; /* ゴシック体 */
-      color: #f5f5f5; /* 白に近い文字色でコントラストを確保 */
+      color: #f5f5f5; /* 明るい文字色 */
       margin: 0;
       padding: 0;
+      line-height: 1.8; /* 行間を広げる */
     }
     .header {
       margin-top: 60px;
@@ -33,9 +34,11 @@
       border: none;
       border-radius: 10px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      padding: 20px;
     }
-    .card .form-label {
+    .form-label {
       color: #f5f5f5;
+      font-size: 1rem; /* 統一した文字サイズ */
     }
     .form-select, .form-control {
       border-radius: 5px;
@@ -49,13 +52,12 @@
       font-size: 1.1rem;
       border-radius: 50px;
       transition: background-color 0.3s ease;
+      /* ボタンをさらに大きく: btn-lgに加えてpadding強化 */
+      padding: 15px 50px;
     }
     .btn-primary:hover {
       background-color: #ffffff;
       color: #9b1b30;
-    }
-    .card-title {
-      color: #f5f5f5;
     }
     .footer-text {
       color: #cccccc;
@@ -64,9 +66,6 @@
       padding: 20px;
     }
     @media (max-width: 576px) {
-      .card {
-        margin-top: 20px;
-      }
       .btn {
         font-size: 1rem;
       }
@@ -76,14 +75,14 @@
 <body>
   <div class="container text-center">
     <header class="header">
-      <h1 class="display-4 header-title">Rowing Motion Analysis</h1>
+      <h1 class="display-4 header-title text-center">Rowing Motion Analysis</h1>
       <p class="header-subtitle">アップロードした動画を自動解析し、ローイング動作を分析します。</p>
     </header>
 
     <!-- アップロードフォームカード -->
-    <div class="card mx-auto" style="max-width: 500px; padding: 20px;">
+    <div class="card mx-auto" style="max-width: 500px;">
       <div class="card-body">
-        <h2 class="h4 card-title mb-4">動画アップロード</h2>
+        <!-- 「動画アップロード」の文字は削除 -->
         <form action="#" method="post" enctype="multipart/form-data">
           <!-- 選手名 -->
           <div class="mb-3 text-start">
@@ -102,8 +101,8 @@
             <input class="form-control" type="file" name="file" id="file" accept="video/*" required>
           </div>
 
-          <!-- 送信ボタン -->
-          <div class="d-grid">
+          <!-- 送信ボタン：中央揃え -->
+          <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary btn-lg">解析開始</button>
           </div>
           <small class="text-light d-block mt-2">対応形式: mp4, avi, mov</small>
@@ -116,7 +115,7 @@
     </footer>
   </div>
 
-  <!-- Bootstrap JS（CDN利用） -->
+  <!-- Bootstrap JS（CDN） -->
   <script 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+P5CJ7lR5TvZNTv617RZbG1t8M7gD" 
