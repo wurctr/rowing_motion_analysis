@@ -4,32 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rowing Motion Analysis</title>
-  <!-- Bootstrap CSS（CDN） -->
+  <!-- Bootstrap CSS -->
   <link 
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet" 
-    integrity="sha384-9ndCyUa1j47c4KY3qzYiu7LDlUi2sCALbZ1B/TYhhcF0ScNFK0jQJk4tdfqa7lNf" 
+    rel="stylesheet"
+    integrity="sha384-9ndCyUa1j47c4KY3qzYiu7LDlUi2sCALbZ1B/TYhhcF0ScNFK0jQJk4tdfqa7lNf"
     crossorigin="anonymous">
   <style>
     body {
-      background-color: #333333; /* ダークグレー背景 */
+      background-color: #333333; /* ダークグレー */
       font-family: "Helvetica", "Arial", sans-serif; /* ゴシック体 */
-      color: #f5f5f5; /* 明るい文字色 */
+      color: #f5f5f5;
       margin: 0;
       padding: 0;
-      line-height: 1.8; /* 行間を広げる */
-    }
-    .header {
-      margin-top: 60px;
-    }
-    .header-title {
-      color: #f5f5f5;
-    }
-    .header-subtitle {
-      color: #cccccc;
+      line-height: 1.8;
     }
     .card {
-      margin-top: 40px;
       background-color: #9b1b30; /* 臙脂 */
       border: none;
       border-radius: 10px;
@@ -38,7 +28,7 @@
     }
     .form-label {
       color: #f5f5f5;
-      font-size: 1rem; /* 統一した文字サイズ */
+      font-size: 1rem;
     }
     .form-select, .form-control {
       border-radius: 5px;
@@ -52,73 +42,61 @@
       font-size: 1.1rem;
       border-radius: 50px;
       transition: background-color 0.3s ease;
-      /* ボタンをさらに大きく: btn-lgに加えてpadding強化 */
       padding: 15px 50px;
     }
     .btn-primary:hover {
       background-color: #ffffff;
       color: #9b1b30;
     }
-    .footer-text {
-      color: #cccccc;
-    }
-    .container {
-      padding: 20px;
-    }
-    @media (max-width: 576px) {
-      .btn {
-        font-size: 1rem;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="container text-center">
-    <header class="header">
-      <h1 class="display-4 header-title text-center">Rowing Motion Analysis</h1>
-      <p class="header-subtitle">アップロードした動画を自動解析し、ローイング動作を分析します。</p>
-    </header>
+  <!-- 画面全体を縦横中央に配置するためのラッパ -->
+  <div class="d-flex align-items-center justify-content-center min-vh-100">
+    <div class="container text-center">
+      <header class="mb-4">
+        <h1 class="display-4">Rowing Motion Analysis</h1>
+        <p class="text-muted">アップロードした動画を自動解析し、ローイング動作を分析します。</p>
+      </header>
 
-    <!-- アップロードフォームカード -->
-    <div class="card mx-auto" style="max-width: 500px;">
-      <div class="card-body">
-        <!-- 「動画アップロード」の文字は削除 -->
-        <form action="#" method="post" enctype="multipart/form-data">
-          <!-- 選手名 -->
-          <div class="mb-3 text-start">
-            <label for="player" class="form-label">選手名</label>
-            <select class="form-select" name="player" id="player" required>
-              <option value="" disabled selected>選択してください</option>
-              <option value="Player A">Player A</option>
-              <option value="Player B">Player B</option>
-              <option value="Player C">Player C</option>
-            </select>
-          </div>
+      <div class="card mx-auto" style="max-width: 500px;">
+        <div class="card-body">
+          <form action="#" method="post" enctype="multipart/form-data">
+            <!-- 選手名 -->
+            <div class="mb-3 text-start">
+              <label for="player" class="form-label">選手名</label>
+              <select class="form-select" name="player" id="player" required>
+                <option value="" disabled selected>選択してください</option>
+                <option value="Player A">Player A</option>
+                <option value="Player B">Player B</option>
+                <option value="Player C">Player C</option>
+              </select>
+            </div>
 
-          <!-- 動画ファイル選択 -->
-          <div class="mb-4 text-start">
-            <label for="file" class="form-label">動画ファイルを選択</label>
-            <input class="form-control" type="file" name="file" id="file" accept="video/*" required>
-          </div>
+            <!-- 動画ファイル選択 -->
+            <div class="mb-4 text-start">
+              <label for="file" class="form-label">動画ファイルを選択</label>
+              <input class="form-control" type="file" name="file" id="file" accept="video/*" required>
+            </div>
 
-          <!-- 送信ボタン：中央揃え -->
-          <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary btn-lg">解析開始</button>
-          </div>
-          <small class="text-light d-block mt-2">対応形式: mp4, avi, mov</small>
-        </form>
+            <!-- 解析開始ボタン：中央揃え -->
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary btn-lg">解析開始</button>
+            </div>
+            <small class="text-light d-block mt-2">対応形式: mp4, avi, mov</small>
+          </form>
+        </div>
       </div>
-    </div>
 
-    <footer class="text-center mt-5">
-      <p class="footer-text mb-0">© 2024 Your Organization Name</p>
-    </footer>
+      <footer class="text-center mt-5">
+        <p class="text-muted mb-0">© 2024 Your Organization Name</p>
+      </footer>
+    </div>
   </div>
 
-  <!-- Bootstrap JS（CDN） -->
   <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+P5CJ7lR5TvZNTv617RZbG1t8M7gD" 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+P5CJ7lR5TvZNTv617RZbG1t8M7gD"
     crossorigin="anonymous">
   </script>
 </body>
